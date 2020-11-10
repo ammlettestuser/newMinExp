@@ -38,9 +38,9 @@ From: airl_lab/default/airl_env:bare_ci
     fi
     cd /git/sferes2/exp/minimal_experiment/src
     # running the experiment (the -d option allows to define the directory where the results should be stored
-    PATHNAME=$(date +%Y-%m-%d_%H_%M_%S)_$$
-    mkdir $CURPATH/results/$PATHNAME
-    python3 experiment.py  --dest $CURPATH/results/$PATHNAME $1
+    
+    mkdir $CURPATH/results
+    python3 experiment.py  --dest $CURPATH/results $1
 
 
 
@@ -48,7 +48,7 @@ From: airl_lab/default/airl_env:bare_ci
     python3 /git/sferes2/exp/minimal_experiment/analysis/analysis.py "$@"
     CURPATH=$(pwd)
     cd /git/sferes2/exp/minimal_experiment/
-    python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH
+    python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH/results
     
 %apprun gen_job_scripts
     echo "Generating job scripts"
