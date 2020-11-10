@@ -40,7 +40,7 @@ From: airl_lab/default/airl_env:bare_ci
     # running the experiment (the -d option allows to define the directory where the results should be stored
     PATHNAME=$(date +%Y-%m-%d_%H_%M_%S)_$$
     mkdir $CURPATH/results/$PATHNAME
-    python3 experiment.py $0 -d $CURPATH/results/$PATHNAME
+    python3 experiment.py  --dest $CURPATH/results/$PATHNAME $0
 
 
 
