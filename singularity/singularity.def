@@ -45,8 +45,9 @@ From: airl_lab/default/airl_env:bare_ci
 
 
 %apprun analysis
-    python3 /git/sferes2/exp/minimal_experiment/analysis/analysis.py --source $CURPATH/results "$@"
+
     CURPATH=$(pwd)
+    python3 /git/sferes2/exp/minimal_experiment/analysis/analysis.py --source $CURPATH/results "$@"
     cd /git/sferes2/exp/minimal_experiment/
     python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH
     
