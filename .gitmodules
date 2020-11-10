@@ -1,3 +1,0 @@
-[submodule "submodules/singularity_scripts"]
-	path = submodules/singularity_scripts
-	url = ../../../AIRL_tools/singularity_scripts

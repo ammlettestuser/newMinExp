@@ -6,5 +6,5 @@ The collected results are as follow.
 
 Main result:
 
-![filename](/UPLOAD/*.png)
+![filename](./results/result.png)
 
