@@ -6,7 +6,7 @@ import argparse
 
 def main(path, N):
     a = np.random.rand(N,2)
-    numpy.savetxt(path+"/result.csv", a, delimiter=",")
+    np.savetxt(path+"/result.csv", a, delimiter=",")
 
 if __name__ == "__main__":
 
@@ -18,8 +18,8 @@ if __name__ == "__main__":
                         help='Destination of the result file')
 
     args = parser.parse_args()
-    #print(args.N)
-    #print(args.path)
+    print(args.N)
+    print(args.path)
     
     main(args.path, args.N)
                 
