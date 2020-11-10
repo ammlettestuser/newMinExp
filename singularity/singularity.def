@@ -31,11 +31,21 @@ From: airl_lab/default/airl_env:bare_ci
    #CLONEHERE
 
 %runscript
-    echo "Please call either the low_mutation app or the high_mutation app"
+    echo "Starting experiment"
+    CURPATH=$(pwd)
+    if [ ! -d ./results ]; then
+       mkdir results
+    fi
+    cd /git/sferes2/exp/minimal_experiment/src
+    # running the experiment (the -d option allows to define the directory where the results should be stored
+    PATHNAME=$(date +%Y-%m-%d_%H_%M_%S)_$$
+    mkdir $CURPATH/results/$PATHNAME
+    python3 experiment.py $0 -d $CURPATH/results/$PATHNAME
+
 
 
 %apprun analysis
-    python3 /git/sferes2/exp/template_experiment/python/analysis.py "$@"
+    python3 /git/sferes2/exp/minimal_experiment/analysis/analysis.py "$@"
     CURPATH=$(pwd)
     cd /git/sferes2/exp/minimal_experiment/
     python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH
