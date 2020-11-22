@@ -1,0 +1,48 @@
+image: aneoshun/airl_build_env:latest
+
+include:
+  - project: 'AIRL/AIRL_tools/remote_builder'
+    ref: master
+    file: 'gitlab-ci-template.yml'
+
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+stages:
+  - build
+  - deploy
+
+test_gitlab_notebook:
+  stage: .pre
+  script:
+    - python ./submodules/gitlab_notebook/gen_report.py --find_project  # Check that we can find the project and push issues
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+
+build_image:
+  stage: build
+
+
+launch_experiment:
+  stage: deploy
+  script:
+    - /bin/bash ./submodules/gitlab_notebook/pull_image.sh --uri library://$REGISTRY_PATH/$CI_PROJECT_NAME --tag $CI_COMMIT_SHORT_SHA --cli airl_registry
+    - if [ -z "$SERVER_IP" ]; then SERVER_IP=login.hpc.ic.ac.uk; fi
+    - scp ${CI_PROJECT_NAME}_${CI_COMMIT_SHORT_SHA}.sif $USERNAME@$SERVER_IP:gitlab_notebook_experiments/
+    - COMMAND="export CI_COMMIT_SHORT_SHA="\""$CI_COMMIT_SHORT_SHA"\"" && export CI_COMMIT_TITLE="\""$CI_COMMIT_TITLE"\"" && export PERSONAL_TOKEN=$PERSONAL_TOKEN && cd gitlab_notebook_experiments && singularity run --app gen_job_scripts  ${CI_PROJECT_NAME}_${CI_COMMIT_SHORT_SHA}.sif $JSON_FILE && ./exec.sh "
+    - echo $COMMAND && ssh $USERNAME@$SERVER_IP $COMMAND
+    - echo $?
+  rules:
+    - if: '$CI_COMMIT_REF_PROTECTED =="true" && $CI_COMMIT_MESSAGE =~  /\[start[ _-]exp?\]/i' 
+      when: on_success
+    - if: '$CI_COMMIT_REF_PROTECTED =="true"' 
+      when: manual
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+
+
