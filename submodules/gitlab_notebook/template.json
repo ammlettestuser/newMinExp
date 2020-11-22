@@ -1,0 +1,10 @@
+{
+    "wall_time" : "23:59:00",
+    "nb_cores" : "24",
+    "mem" : "3gb",
+    "nb_runs" : "10",
+    "res_dir" : "./results",
+    "apps" : ["exp_1", "exp_2","exp_3"],
+    "args" : "arg0_0 arg0_1",
+    "analysis" : "analysis"
+}

@@ -1,0 +1,15 @@
+image: aneoshun/airl_build_env:latest
+
+build_image:
+  script:
+    - cd ./singularity && SINGULARITYENV_CI_JOB_TOKEN=$CI_JOB_TOKEN SINGULARITYENV_CI_COMMIT_SHA=$CI_COMMIT_SHA ./build_final_image.sh  # Build the final image
+    - pattern="final_*.sif" && files=( $pattern ) && IMAGENAME=${files[-1]}
+    - /bin/bash ../submodules/remote_builder/push_image.sh --uri library://$REGISTRY_PATH/$CI_PROJECT_NAME --tag $CI_COMMIT_SHORT_SHA --cli airl_registry --imagefile $IMAGENAME
+
+  rules:
+    - if: '$CI_COMMIT_REF_PROTECTED =="true" && $CI_COMMIT_MESSAGE =~  /\[start[ _-]build?\]/i' 
+      when: on_success
+    - if: '$CI_COMMIT_REF_PROTECTED =="true"' 
+      when: manual
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
