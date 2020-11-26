@@ -1,5 +1,5 @@
 Bootstrap: library
-From: ubuntu:latest
+From: airl_lab/default/airl_env:bare_ci
 
 
 %labels
