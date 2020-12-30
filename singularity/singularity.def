@@ -41,9 +41,11 @@ From: airl_lab/default/airl_env:bare_ci
     ls
     echo "end ls"
 
-    cd /git/sferes2/exp/newMinExp/src
+    #cd /git/sferes2/exp/newMinExp/src
 
     mkdir $CURPATH/results
+    cd ..
+    
     python3 experiment.py  --dest $CURPATH/results $1
 
 %apprun analysis
