@@ -10,6 +10,7 @@ From: airl_lab/default/airl_env:bare_ci
     
     	
 %post
+   echo "starting singularity post"
    export LD_LIBRARY_PATH="/workspace/lib:$LD_LIBRARY_PATH"
    apt-get update
    DEBIAN_FRONTEND=noninteractive apt-get install -y  git python3-matplotlib python3-numpy python3-tk python3-dev python3-pip
@@ -19,20 +20,23 @@ From: airl_lab/default/airl_env:bare_ci
 
    pip3 install seaborn pandas python-gitlab mdutils
    
-
+   echo "Making sferes2 directories"
    mkdir -p /git/sferes2/exp/newMinExp
    cd /git/sferes2/exp/
-
+   
+   echo "Cloning"
    git clone https://github.com/ammlettestuser/newMinExp.git
 
 %runscript
     echo "Starting runscript experiment"
     CURPATH= $(pwd)
+    echo "current path is"
+    echo "$CURPATH"
     if [ ! -d ./results ]; then
       echo "making results folder"
       mkdir results
     fi
-    cd /git/sferes2/exp/src
+    cd ./git/sferes2/exp/src
 
     mkdir $CURPATH/results
     python3 experiment.py  --dest $CURPATH/results $1
