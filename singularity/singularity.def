@@ -15,11 +15,24 @@ From: airl_lab/default/airl_env:bare_ci
    DEBIAN_FRONTEND=noninteractive apt-get install -y  git python3-matplotlib python3-numpy python3-tk python3-dev python3-pip
    rm -rf /var/lib/apt/lists/*
 
+
+
    pip3 install seaborn pandas python-gitlab mdutils
    
+
+   mkdir -p /git/sferes2/exp/minimal_experiment
+   cd /git/sferes2/exp/
+
    git clone https://github.com/ammlettestuser/newMinExp.git
 
 %runscript
+    echo "Starting runscript experiment"
+    CURPATH= $(pwd)
+    if [ ! -d ./results ]; then
+      mkdir results
+    fi
+    cd /git/sferes2/exp/minimal-experiment/src
+
     mkdir $CURPATH/results
     python3 experiment.py  --dest $CURPATH/results $1
 
