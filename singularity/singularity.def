@@ -16,6 +16,8 @@ From: airl_lab/default/airl_env:bare_ci
    rm -rf /var/lib/apt/lists/*
 
    pip3 install seaborn pandas python-gitlab mdutils
+   
+   git clone https://github.com/ammlettestuser/newMinExp.git
 
 %runscript
     mkdir $CURPATH/results
