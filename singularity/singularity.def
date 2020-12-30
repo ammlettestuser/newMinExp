@@ -46,11 +46,11 @@ From: airl_lab/default/airl_env:bare_ci
     mkdir $CURPATH/results
     cd ..
     echo "$1"
-    python3 experiment.py --dest $CURPATH/results $1
+    python3 experiment.py --dest /results $1
 
 %apprun analysis
     CURPATH=$(pwd)
-    python3 ../analysis/analysis.py --source $CURPATH/results "$@"
+    python3 ../analysis/analysis.py --source ../results "$@"
     cd /git/sferes2/exp/newMinExp
     python3 ../tmp/gen_beta_report $CURPATH
     #python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH
