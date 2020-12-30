@@ -31,12 +31,12 @@ From: airl_lab/default/airl_env:bare_ci
     echo "Starting runscript experiment"
     CURPATH= $(pwd)
     echo "current path is"
-    echo "$CURPATH"
+    echo ${CURPATH}
     if [ ! -d ./results ]; then
       echo "making results folder"
       mkdir results
     fi
-    cd ./git/sferes2/exp/src
+    cd /git/sferes2/exp/newMinExp/src
 
     mkdir $CURPATH/results
     python3 experiment.py  --dest $CURPATH/results $1
