@@ -15,7 +15,7 @@ From: airl_lab/default/airl_env:bare_ci
    DEBIAN_FRONTEND=noninteractive apt-get install -y  git python3-matplotlib python3-numpy python3-tk python3-dev python3-pip
    rm -rf /var/lib/apt/lists/*
 
-   pip3 install seaborn pandas python-gitlab
+   pip3 install seaborn pandas python-gitlab mdutils
 
 %runscript
     mkdir $CURPATH/results
@@ -23,7 +23,8 @@ From: airl_lab/default/airl_env:bare_ci
 
 %apprun analysis
     CURPATH=$(pwd)
-    python3 ./analysis/analysis.py --source $CURPATH/results "$@"
+    #python3 ./analysis/analysis.py --source $CURPATH/results "$@"
+    python3 ./tmp/gen_beta_report $CURPATH
     python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH
     
 %apprun gen_job_scripts
