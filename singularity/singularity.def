@@ -46,7 +46,7 @@ From: airl_lab/default/airl_env:bare_ci
     mkdir $CURPATH/results
     cd ..
     echo "$1"
-    python3 experiment.py --dest /results $1
+    python3 experiment.py $1
 
 %apprun analysis
     CURPATH=$(pwd)
