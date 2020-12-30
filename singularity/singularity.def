@@ -36,6 +36,11 @@ From: airl_lab/default/airl_env:bare_ci
       echo "making results folder"
       mkdir results
     fi
+    
+    echo "lsing"
+    ls
+    echo "end ls"
+
     cd /git/sferes2/exp/newMinExp/src
 
     mkdir $CURPATH/results
