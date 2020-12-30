@@ -4,10 +4,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 def main(path):
-    a = np.loadtxt(path+"/result.csv", delimiter=",")
+    csv_path = "result.csv" if path == "./" else path + "/result.csv"
+    a = np.loadtxt(csv_path, delimiter=",")
 
     sns.scatterplot(data=a)
-    png_name = path+"/result.png"
+    png_name = "result.png" if path == "./" else path + "/result.png"
+    
     plt.savefig(png_name)
             
     
