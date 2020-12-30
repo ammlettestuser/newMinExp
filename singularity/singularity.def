@@ -20,7 +20,7 @@ From: airl_lab/default/airl_env:bare_ci
    pip3 install seaborn pandas python-gitlab mdutils
    
 
-   mkdir -p /git/sferes2/exp/minimal_experiment
+   mkdir -p /git/sferes2/exp/newMinExp
    cd /git/sferes2/exp/
 
    git clone https://github.com/ammlettestuser/newMinExp.git
@@ -29,18 +29,20 @@ From: airl_lab/default/airl_env:bare_ci
     echo "Starting runscript experiment"
     CURPATH= $(pwd)
     if [ ! -d ./results ]; then
+      echo "making results folder"
       mkdir results
     fi
-    cd /git/sferes2/exp/minimal-experiment/src
+    cd /git/sferes2/exp/src
 
     mkdir $CURPATH/results
     python3 experiment.py  --dest $CURPATH/results $1
 
 %apprun analysis
     CURPATH=$(pwd)
-    #python3 ./analysis/analysis.py --source $CURPATH/results "$@"
+    python3 /git/sferes2/exp/newMinExp/analysis/analysis.py --source $CURPATH/results "$@"
+    cd /git/sferes2/exp/newMinExp
     python3 ./tmp/gen_beta_report $CURPATH
-    python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH
+    #python3 ./submodules/gitlab_notebook/gen_report.py $CURPATH
     
 %apprun gen_job_scripts
     #echo "Generating job scripts"
