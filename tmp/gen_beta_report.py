@@ -4,7 +4,7 @@ import sys
 def gen_content():
     print("Generating content")
     mdFile = MdUtils(file_name="report", title="Beta_Report")
-    mdFile.new_paragraph("Why do phd students get holidays and we don't? :) ")
+    mdFile.new_paragraph("Why do phd students get holidays and we don't?")
     return mdFile
 
 def save_content(file):
