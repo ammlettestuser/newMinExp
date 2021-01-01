@@ -24,7 +24,7 @@ if __name__ == "__main__":
     #print(args.path)
     
     print(sys.argv[1:])
-    obj = json.loads(sys.argv[1:])
+    obj = json.loads(sys.argv[1:].replace("/", ""))[0]
     print(obj)
     print("Value of N is", obj["N"])
 
