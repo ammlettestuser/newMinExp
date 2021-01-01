@@ -23,7 +23,7 @@ if __name__ == "__main__":
     #print("The value of N is:", args.N)
     #print(args.path)
     
-    
+    print("The thing is", sys.argv[1],"end thing")
     obj = json.loads(sys.argv[1])
     print(obj)
     print("Value of N is", obj["N"])
