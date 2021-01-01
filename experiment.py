@@ -4,9 +4,9 @@ import numpy as np
 import argparse
 import sys
 
-def main(path, N):
+def main(N):
     a = np.random.rand(N,2)
-    np.savetxt(path+"/result.csv", a, delimiter=",")
+    np.savetxt("result.csv", a, delimiter=",")
 
 if __name__ == "__main__":
 
@@ -29,5 +29,5 @@ if __name__ == "__main__":
     print(type(obj))
     print("Value of N is", obj["N"])
 
-    main(args.path, obj["N"])
+    main(obj["N"])
                 
