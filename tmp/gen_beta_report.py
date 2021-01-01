@@ -1,10 +1,16 @@
 from mdutils import MdUtils
 import sys
+import csv
 
 def gen_content():
     print("Generating content")
-    mdFile = MdUtils(file_name="report", title="Beta_Report")
-    mdFile.new_paragraph("Why do phd students get holidays and we don't?")
+    mdFile = MdUtils(file_name="report", title="Experiment Report")
+    mdFile.new_paragraph("The experiment generated the following results:")
+    
+    with open("../result.csv") as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=",")
+        for row in csv_reader:
+            mdFile.new_paragraph(", ".join(row))
     return mdFile
 
 def save_content(file):
