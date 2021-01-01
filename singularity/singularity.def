@@ -18,7 +18,7 @@ From: airl_lab/default/airl_env:bare_ci
 
 
 
-   pip3 install seaborn pandas python-gitlab mdutils
+   pip3 install seaborn pandas python-gitlab mdutils json
    
    echo "Making sferes2 directories"
    mkdir -p /git/sferes2/exp/newMinExp
