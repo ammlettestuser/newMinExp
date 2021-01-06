@@ -5,7 +5,7 @@ import argparse
 import sys
 
 def main(N):
-    a = np.random.rand(N,2)
+    a = np.array(["Classification rate: 0.93"])
     np.savetxt("result.csv", a, delimiter=",")
 
 if __name__ == "__main__":
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     obj = json.loads(" ".join(sys.argv[1:]))
     print(obj)
     print(type(obj))
-    print("Value of N is", obj["N"])
+    
 
-    main(obj["N"])
+    main(obj["learning_rate"])
                 
