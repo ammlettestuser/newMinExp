@@ -5,7 +5,7 @@ import argparse
 import sys
 
 def main(N):
-    a = np.array(["Classification rate: 0.93"])
+    a = np.array([0.93])
     np.savetxt("result.csv", a, delimiter=",")
 
 if __name__ == "__main__":
